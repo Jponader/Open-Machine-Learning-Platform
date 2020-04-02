@@ -27,6 +27,3 @@ class Config(object):
 
 	PREDICT_Q = 'predictQueue'
 	BUILD_Q = 'builderQueue'
-
-	os.environ["AWS_ACCESS_KEY_ID"] = "AKIAUXUIXJHESUTVP37A"
-	os.environ["AWS_SECRET_ACCESS_KEY"] = "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"	

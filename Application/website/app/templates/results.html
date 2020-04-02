@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<h1>{{model.name}}</h1>
+
+	{% if predict.completed == False %}
+		<script language="javascript">
+			setInterval(function(){
+   				window.location.reload(1);
+					}, 15000);
+		</script>
+		<h3>Data Processing</h3>
+		<small class="form-text text-muted">Please comback later, or refresh the page</small>
+        
+    {% else %}
+        <a href="{{ url_for('download', filename=filename) }}">Download</a>
+    {% endif %}
+	
+
+{% endblock %}

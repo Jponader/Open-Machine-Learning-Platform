@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+	<h1>Welcome to the Open Machine Learning Platform</h1>
+	<p>
+		The goal of this project is to allow anyone to build and use machine learning technology with limited expertise needed. To accomplish this we allow anyone to upload data and build a model based on this data with no coding nescessary. We also offer advanced tools that allow the user speceify the structure of thier model. After a model has been made and trained the model can then be used by anyone. Giving everyione access to it and removing the requirment for having your own data to use machine learning.
+	</p>
+
+	<div>
+		<a class="btn btn-dark" href="{{ url_for('build') }}" >Build a Model</a>
+		<a class="btn btn-dark" href="{{ url_for('predict') }}">Use a Model</a>
+	</div>
+</div>
+{% endblock %}

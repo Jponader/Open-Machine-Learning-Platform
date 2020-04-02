@@ -1,0 +1,10 @@
+env
+dev
+__pycache__
+.DS_Store
+*/VTS3
+masterEnviroment
+*.pyc
+Archive.zip
+
+*/*/migrations

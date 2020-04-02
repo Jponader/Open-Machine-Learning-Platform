@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="" method="post"  enctype="multipart/form-data" novalidate>
+	{{ form.hidden_tag() }}
+
+	<div class="form-group">
+		<label>{{form.name.label}}</label>
+		{{form.name(size=32, class="form-control")}}
+		{% for error in form.name.errors %}
+			<small class="form-text" style="color: red;">[{{ error }}]</small>
+		{% endfor %}
+		<small class="form-text text-muted">The Public name for this Model</small>
+	</div>
+
+	<div class="form-group">
+		<label>{{form.model_desc.label}}</label>
+		{{form.model_desc(class="form-control")}}
+		{% for error in form.model_desc.errors %}
+			<small class="form-text" style="color: red;">[{{ error }}]</small>
+		{% endfor %}
+		<small class="form-text text-muted">The Public Description of this Model</small>
+	</div>
+
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col">
+				<label>{{form.dataType.label}}</label>
+				{{form.dataType(class="form-control")}}
+				{% for error in form.dataType.errors %}
+					<small class="form-text" style="color: red;">[{{ error }}]</small>
+				{% endfor %}
+			</div>
+			<div class="col">
+				<label>{{form.data.label}}</label>
+				{{form.data(class="form-control-file")}}
+				{% for error in form.data.errors %}
+					<small class="form-text" style="color: red;">[{{ error }}]</small>
+				{% endfor %}
+				<small class="form-text text-muted">Main input Data</small>
+			</div>	
+			
+			<div class="col">
+				<label>{{form.labels.label}}</label>
+				{{form.labels(class="form-control-file")}}
+				{% for error in form.labels.errors %}
+					<small class="form-text" style="color: red;">[{{ error }}]</small>
+				{% endfor %}
+				<small class="form-text text-muted">If labels are not includeded in the input please include them here</small>
+			</div>
+		</div>	
+	</div>
+
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-3">
+				<label>{{form.custom.label}}</label>
+				{{form.custom(class="form-control")}}
+				{% for error in form.custom.errors %}
+					<small class="form-text" style="color: red;">[{{ error }}]</small>
+				{% endfor %}
+				<small class="form-text text-muted">Build a Custom Model or allow for the software to build you a model based on your data</small>
+			</div>
+			<div class="col">
+				<label>{{form.customDesc.label}}</label>
+				{{form.customDesc(class="form-control")}}
+				{% for error in form.customDesc.errors %}
+					<small class="form-text" style="color: red;">[{{ error }}]</small>
+				{% endfor %}
+				<small class="form-text text-muted"> Insert Link to explaining Custom Input</small>
+			</div>
+		</div>	
+	</div>
+
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col">
+				<label>{{form.layers.label}}</label>
+				{{form.layers(class="form-control")}}
+				{% for error in form.layers.errors %}
+					<small class="form-text" style="color: red;">[{{ error }}]</small>
+				{% endfor %}
+				<small class="form-text text-muted">Number of Layers in Automated Build</small>
+			</div>
+			<div class="col">
+				<label>{{form.sampling.label}}</label>
+				{{form.sampling(class="form-control")}}
+				{% for error in form.sampling.errors %}
+					<small class="form-text" style="color: red;">[{{ error }}]</small>
+				{% endfor %}
+				<small class="form-text text-muted">Percent of Data Inputs used for Training</small>
+			</div>
+		</div>	
+	</div>
+
+	<a> {{form.buildModel( class="btn btn-primary")}}</a>
+</form>
+
+<div style="padding-bottom: 120px"></div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

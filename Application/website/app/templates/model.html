@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<h1>{{model.name}}</h1>
+
+	<p>Description: </p>
+	<p style="white-space: pre-wrap; overflow-wrap: break-word; padding-left: 5%;"> {{model.model_desc}} </p>
+	<p> Date Created: {{date}}</p>
+
+	<p>Layers: {{layers}}</p>
+	<p>Sampling: {{ sampling }}</p>
+
+	<p>Categories: {{model.mapping}}</p>
+	<p>Data Type: {{dataType}}</p>
+
+	{% if custom %}
+		<p>{{ customDesc }}</p>
+    {% endif %}
+
+
+	{% if model.trained == False %}
+		<script language="javascript">
+			setInterval(function(){
+   				window.location.reload(1);
+					}, 15000);
+		</script>
+		<h3>Model Currently Training</h3>
+		<small class="form-text text-muted">Please comback later, or refresh the page</small>
+        
+    {% else %}
+    	<a href="{{ url_for('downloadh5', filename= model.model_id|string + "model.h5") }}">Download Model</a>
+    	<br>
+        <form action="" method="post"  enctype="multipart/form-data" novalidate>
+			{{ form.hidden_tag() }}
+			<div class="form-group">
+				<div class="form-row">
+					<div class="col">
+						<h3>Data For Predictions</h3>
+						{{form.data(class="form-control-file")}}
+						{% for error in form.data.errors %}
+							<small class="form-text" style="color: red;">[{{ error }}]</small>
+						{% endfor %}
+					</div>	
+				</div>	
+			</div>
+			<a> {{form.predict( class="btn btn-primary")}}</a>
+		</form>
+		<div style="padding-bottom: 120px"></div>
+    {% endif %}
+
+
+{% endblock %}
+

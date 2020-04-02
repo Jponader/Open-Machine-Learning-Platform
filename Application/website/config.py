@@ -25,5 +25,10 @@ class Config(object):
 	S3NAME = 'open-ml-bucket'
 	POSTS_PER_PAGE = 5
 
+	AWS_REGION = 'us-east-2'
+	os.environ['AWS_DEFAULT_REGION'] = AWS_REGION
+	os.environ["AWS_ACCESS_KEY_ID"] = "YOUR_AWS_ACCESS_KEY_ID"
+	os.environ["AWS_SECRET_ACCESS_KEY"] = "YOUR_AWS_SECRET_ACCESS_KEY"	
+
 	PREDICT_Q = 'predictQueue'
 	BUILD_Q = 'builderQueue'

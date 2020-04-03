@@ -19,7 +19,7 @@ def build():
             print(message)
            
             task = builder(int(message['id']))
-            task.run()
+            task.start()
 
             response = Response("", status=200)
         except Exception as ex:

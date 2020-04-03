@@ -9,6 +9,7 @@ from keras.callbacks.callbacks import EarlyStopping
 import pandas as pd
 import numpy as np
 from sklearn import preprocessing
+from math import ceil, log
 
 #S3 
 import boto3
@@ -92,17 +93,44 @@ class builder(threading.Thread):
 
 		return ((xTrain,yTrain),(xTest, yTest))
 
+	def layerSizes(self):
+		layers = self.config['layers']
+		inpow = int(ceil(log(self.localConfig['input'],2)))
+		outpow = int(ceil(log(self.localConfig['output'],2)))
+		powdif = abs(outpow - inpow)
+
+		layerSet = []
+		change = powdif / self.config['layers']
+
+		if change < 1:
+			change = 1
+
+		if inpow > outpow:
+			up = (layers - powdif)/2
+		else:
+			up = ceil(layers + powdif)/2
+
+		for l in range(layers):
+			if up > 0:
+				inpow += change
+				up -= 1
+				layerSet.append(inpow)
+			else:
+				inpow -= change
+				layerSet.append(inpow)
+		return layerSet
 
 	def buildModel(self):
 		if self.config['custom']:
 			model = customModel(self.config['model'])
 
 		else: 
+			layerSet = self.layerSizes()
 			inputs = keras.Input(shape=self.localConfig['input'])
 			x = inputs
 
 			for i in range(self.config['layers']):
-				x= layers.Dense(12, activation='relu')(x)
+				x= layers.Dense(2**layerSet[i], activation='relu')(x)
 
 			output = layers.Dense(self.localConfig['output'], activation='softmax')(x)
 			model = keras.Model(inputs=inputs, outputs=output)

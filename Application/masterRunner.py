@@ -1,5 +1,6 @@
 import subprocess
 import threading
+import os
 
 class webServer(threading.Thread):
 	def run(self):
@@ -16,6 +17,9 @@ class predictorServer(threading.Thread):
 
 
 if __name__ == '__main__':
+	if not os.path.exists('VTS3'):
+		os.makedirs('VTS3')
+
 	web = webServer()
 	build = builderServer()
 	pred = predictorServer()
